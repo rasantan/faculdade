@@ -3,12 +3,12 @@
 int main() {
     // ===== MOVIMENTO DA TORRE =====
     printf("=== Torre ===\n");
-    
+
     // Movimento para cima (4 casas)
     for(int i = 0; i < 4; i++) {
         printf("Cima\n");
     }
-    
+
     // Movimento para baixo (3 casas)
     int contador_baixo = 0;
     while(contador_baixo < 3) {
@@ -32,7 +32,7 @@ int main() {
 
     // ===== MOVIMENTO DO BISPO =====
     printf("\n=== Bispo ===\n");
-    
+
     // Diagonal superior-esquerda (3 casas)
     for(int i = 0; i < 3; i++) {
         printf("Cima Esquerda\n");
@@ -47,7 +47,7 @@ int main() {
 
     // ===== MOVIMENTO DA RAINHA =====
     printf("\n=== Rainha ===\n");
-    
+
     // Combina movimentos de Torre e Bispo
     // Movimento horizontal (esquerda 2x)
     for(int i = 0; i < 2; i++) {
@@ -59,6 +59,26 @@ int main() {
     while(mov > 0) {
         printf("Cima Direita\n");
         mov--;
+    }
+
+    // ===== MOVIMENTO DO CAVALO =====
+    printf("\n=== Cavalo ===\n");
+
+    // Loop externo (for) para controlar o numero de movimentos em L
+    for(int i = 0; i < 1; i++) {
+        // Primeiro movimento: 2 casas para baixo (loop while)
+        int vertical = 0;
+        while(vertical < 2) {
+            printf("Baixo\n");
+            vertical++;
+        }
+
+        // Segundo movimento: 1 casa para esquerda (loop do-while)
+        int horizontal = 0;
+        do {
+            printf("Esquerda\n");
+            horizontal++;
+        } while(horizontal < 1);
     }
 
     return 0;
