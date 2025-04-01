@@ -1,45 +1,35 @@
-
 #include <stdio.h>
 
 int main() {
-    // ===== DECLARAÇÃO DE VARIÁVEIS PARA AS DUAS CARTAS =====
+    // Variáveis para as cartas
+    char estado1, codigo1[4], cidade1[50];
+    unsigned long int populacao1;
+    float area1, pib1;
+    int pontosTuristicos1;
+    float densidade1, pibPerCapita1;
 
-    // Variáveis para a primeira carta
-    char estado1;                // Letra de A a H
-    char codigo1[4];             // Código no formato "A01"
-    char cidade1[50];            // Nome da cidade (até 50 caracteres)
-    unsigned long int populacao1; // População em milhares
-    float area1;                 // Área em km²
-    float pib1;                  // PIB em bilhões de reais
-    int pontosTuristicos1;       // Quantidade de pontos turísticos
-
-    float densidade1;            // Densidade populacional (hab/km²)
-    float pibPerCapita1;         // PIB per capita (R$ por habitante)
-
-    // Variáveis para a segunda carta
-    char estado2;
-    char codigo2[4];
-    char cidade2[50];
+    char estado2, codigo2[4], cidade2[50];
     unsigned long int populacao2;
-    float area2;
-    float pib2;
+    float area2, pib2;
     int pontosTuristicos2;
+    float densidade2, pibPerCapita2;
 
-    float densidade2;
-    float pibPerCapita2;
+    int opcao;
 
-    // ===== CADASTRO DA PRIMEIRA CARTA =====
+    // Cadastro das cartas
+    printf("===== CADASTRO DAS CARTAS =====\n");
+        // ===== CADASTRO DA PRIMEIRA CARTA =====
     printf("===== CADASTRO DA PRIMEIRA CARTA =====\n");
 
     // Leitura do estado (letra de A-H)
     printf("Estado (A-H): ");
-    scanf(" %c", &estado1); // Espaço antes de %c para ignorar espaços anteriores
+    scanf(" %c", &estado1);
 
     // Leitura do código (ex: A01)
     printf("Codigo (ex: A01): ");
     scanf("%s", codigo1);
 
-    // Leitura do nome da cidade (permite espaços)
+    // Leitura do nome da cidade
     printf("Nome da cidade: ");
     scanf(" %[^\n]", cidade1); // %[^\n] lê até a quebra de linha
 
@@ -80,33 +70,52 @@ int main() {
     printf("Pontos turisticos: ");
     scanf("%d", &pontosTuristicos2);
 
-    // ===== CÁLCULOS DAS MÉTRICAS =====
-    // Cálculos para a primeira carta
-    densidade1 = (populacao1 * 1000) / area1; // Converte milhares para habitantes
-    pibPerCapita1 = (pib1 * 1e9) / (populacao1 * 1000); // Converte bilhões para reais
 
-    // Cálculos para a segunda carta
+    // Cálculos (igual ao nível novato)
+    densidade1 = (populacao1 * 1000) / area1;
+    pibPerCapita1 = (pib1 * 1e9) / (populacao1 * 1000);
     densidade2 = (populacao2 * 1000) / area2;
     pibPerCapita2 = (pib2 * 1e9) / (populacao2 * 1000);
 
-    // ===== EXIBIÇÃO DOS RESULTADOS =====
-    printf("\n\n=== CARTA 1 - %s (%s) ===\n", codigo1, cidade1);
-    printf("Estado: %c\n", estado1);
-    printf("Populacao: %lu mil hab\n", populacao1);
-    printf("Area: %.2f km²\n", area1);
-    printf("PIB: R$ %.2f bilhoes\n", pib1);
-    printf("Pontos turisticos: %d\n", pontosTuristicos1);
-    printf("Densidade populacional: %.2f hab/km²\n", densidade1);
-    printf("PIB per capita: R$ %.2f\n", pibPerCapita1);
+    // Menu interativo
+    do {
+        printf("\n\n=== MENU DE COMPARACAO ===\n");
+        printf("1 - Comparar Populacao\n");
+        printf("2 - Comparar Area\n");
+        printf("3 - Comparar PIB\n");
+        printf("4 - Comparar Pontos Turisticos\n");
+        printf("5 - Comparar Densidade Populacional\n");
+        printf("6 - Comparar PIB per Capita\n");
+        printf("0 - Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
 
-    printf("\n=== CARTA 2 - %s (%s) ===\n", codigo2, cidade2);
-    printf("Estado: %c\n", estado2);
-    printf("Populacao: %lu mil hab\n", populacao2);
-    printf("Area: %.2f km²\n", area2);
-    printf("PIB: R$ %.2f bilhoes\n", pib2);
-    printf("Pontos turisticos: %d\n", pontosTuristicos2);
-    printf("Densidade populacional: %.2f hab/km²\n", densidade2);
-    printf("PIB per capita: R$ %.2f\n", pibPerCapita2);
+        switch(opcao) {
+            case 1:
+                printf("Populacao: %d\n", (populacao1 > populacao2) ? 1 : 0);
+                break;
+            case 2:
+                printf("Area: %d\n", (area1 > area2) ? 1 : 0);
+                break;
+            case 3:
+                printf("PIB: %d\n", (pib1 > pib2) ? 1 : 0);
+                break;
+            case 4:
+                printf("Pontos Turisticos: %d\n", (pontosTuristicos1 > pontosTuristicos2) ? 1 : 0);
+                break;
+            case 5:
+                printf("Densidade Populacional: %d\n", (densidade1 < densidade2) ? 1 : 0);
+                break;
+            case 6:
+                printf("PIB per Capita: %d\n", (pibPerCapita1 > pibPerCapita2) ? 1 : 0);
+                break;
+            case 0:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+        }
+    } while(opcao != 0);
 
     return 0;
 }
